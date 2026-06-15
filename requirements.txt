@@ -1,0 +1,7 @@
+sentence-transformers
+chromadb
+langchain-text-splitters
+fastapi
+uvicorn
+groq
+
