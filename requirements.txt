@@ -4,4 +4,5 @@ langchain-text-splitters
 fastapi
 uvicorn
 groq
+rank-bm25
 
