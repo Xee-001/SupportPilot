@@ -84,10 +84,7 @@ Ticket-volume forecasting on a public support-tickets dataset (Prophet or simple
 4. **Public GitHub, daily commits** — green squares tell the self-driven story for you.
 5. **Budget:** <$10/month — small models (gpt-4o-mini / Claude Haiku), free embedding models, AWS free tier.
 
-## Your interview pitch after Phase 2 (memorize the shape)
-*"I have 3 years of backend engineering on enterprise production systems. Over the last year I've moved into AI engineering — I built and deployed SupportPilot, a RAG-based support assistant: FastAPI with streaming, hybrid retrieval over pgvector, an agentic escalation workflow in LangGraph, Dockerized and deployed on AWS with CI/CD and automated RAG evaluation. Happy to walk through any part of it."*
 
-Every sentence is checkable, and you can survive any follow-up — because you built it.
 
 
 
