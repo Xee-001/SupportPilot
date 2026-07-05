@@ -1,10 +1,8 @@
 # Flagship Project: "SupportPilot" — AI Product-Support Assistant
 
-One project, built in phases, covering ~90% of the AI Engineer JD. Each phase ends with something **working and demoable**, plus resume bullets you've *earned*. At 10+ hrs/week: usable on resume after Week 1, interview-strong by Week 4.
-
 ## What it is
 An AI assistant for a product company's docs and tickets: users ask questions, it retrieves from product documentation (RAG), answers with citations, escalates complex queries through an agentic workflow, and exposes everything via a FastAPI service — Dockerized, deployed, monitored, and evaluated.
-**Why this project**: it hits every JD line — RAG, AI assistant, agentic workflow, FastAPI, vector DB, embeddings, Docker, CI/CD, AWS, observability, evaluation. And the domain (support assistant) is something every interviewer instantly understands.
+**Why this project**: it covers most tech — RAG, AI assistant, agentic workflow, FastAPI, vector DB, embeddings, Docker, CI/CD, AWS, observability, evaluation. And the domain (support assistant) is something instantly understood.
 
 ## JD coverage map
 
