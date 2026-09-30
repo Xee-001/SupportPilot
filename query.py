@@ -1,3 +1,4 @@
+import re
 from rank_bm25 import BM25Okapi
 from dotenv import load_dotenv
 import chromadb
@@ -15,18 +16,20 @@ all_docs= collection.get()  #fetches all documents in the collection(chroma)
 corpus = all_docs["documents"] # list of all the text chunks in the collection
 ids = all_docs["ids"]
 
-tokenized_corpus = [doc.split() for doc in corpus]
+def tokenize(text):
+    return re.findall(r"\w+", text.lower())
+
+tokenized_corpus = [tokenize(doc) for doc in corpus]
 bm25 = BM25Okapi(tokenized_corpus)
 
 
 def answer_question(question):
     embedding = model.encode([question]).tolist()
-    results = collection.query(query_embeddings=embedding, n_results=3)
+    results = collection.query(query_embeddings=embedding, n_results=10)
     
-    tokenized_query = question.split()
+    tokenized_query = tokenize(question)
     bm25_scores = bm25.get_scores(tokenized_query)
-    bm25_top_indices = sorted(range(len(bm25_scores)), key=lambda i: bm25_scores[i], reverse=True)[:3]
-    bm25_top_chunks = [corpus[i] for i in bm25_top_indices]
+    bm25_top_indices = sorted(range(len(bm25_scores)), key=lambda i: bm25_scores[i], reverse=True)[:10]
     bm25_ids = [ids[i] for i in bm25_top_indices]
 
     vector_ids = results["ids"][0]
@@ -42,10 +45,10 @@ def answer_question(question):
     context = "\n\n".join(final_chunks)
 
 
-    sources = list(set([id.rsplit("_", 1)[0] for id in top_ids]))
+    sources = list(dict.fromkeys([id.rsplit("_", 1)[0] for id in top_ids]))
 
 
-    prompt = f"""You are a helpful assistant that answers questions based on the following context below.
+    prompt = f"""You are a helpful assistant that answers questions based on the following context below. If the answer is not in the context, say you don't know.
     
     Context:
     {context}
@@ -54,8 +57,8 @@ def answer_question(question):
     """
 
     response = llm.chat.completions.create(
-        model ="llama-3.1-8b-instant",
-        max_tokens=512,
+        model ="openai/gpt-oss-20b",
+        max_tokens=1024,
         messages=[
             {"role": "user", "content": prompt}
         ]
@@ -67,7 +70,7 @@ def answer_question(question):
 
 
 if __name__ == "__main__":
-    result = answer_question("What is FastAPI?")
+    result = answer_question("How do I declare a query parameter?")
     print(result["answer"])
     print("\nSources:")
     for s in result["sources"]:

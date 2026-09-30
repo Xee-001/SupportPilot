@@ -17,7 +17,7 @@ def ingest_docs():
             text = f.read()
             chunks = splitter.split_text(text)
             embeddings = model.encode(chunks)
-            collection.add(
+            collection.upsert(
                 documents=chunks,
                 metadatas=[{"source": str(doc)}] * len(chunks),
                 ids=[f"{str(doc)}_{i}" for i in range(len(chunks))],

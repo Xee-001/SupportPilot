@@ -1,5 +1,22 @@
+# Secrets
 .env
+
+# Virtual environment
 .venv/
+
+# Vector store (rebuilt locally by ingest.py)
 chroma_db/
+
+# Python cache
 __pycache__/
+*.pyc
+
+# Docs corpus (cloned separately — see README)
 fastapi/
+
+# macOS
+.DS_Store
+
+# md files
+*CHANGES.md
+*SupportPilot.md
